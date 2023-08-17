@@ -4,27 +4,22 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
-     if (s.length !== t.length) {
-        return false;
-    }
-    const map={}
-    for( i in s){
-        if(!map[s[i]]) map[s[i]]=1
-        else map[s[i]]++
-    }
-    console.log(map)
-    
-    for( i in t){
-        if(map[t[i]]) map[t[i]]--
-    }
-        console.log(map)
+  if (s.length !== t.length) {
+    return false;
+  }
 
-    for( i in map){
-        if(map[i]!=0) return false 
+  const charCount = {};
+
+  for (let i = 0; i < s.length; i++) {
+    charCount[s[i]] = (charCount[s[i]] || 0) + 1;
+    charCount[t[i]] = (charCount[t[i]] || 0) - 1;
+  }
+
+  for (const count of Object.values(charCount)) {
+    if (count !== 0) {
+      return false;
     }
-    
-    return true
-    
-    
-    
+  }
+
+  return true;
 };
